@@ -3,11 +3,11 @@ class Regex:
         self.graf = []
         self.stare_finala = None
         if litera is None and iterator is None:
-            self.graf = [["q0", "§", "q1"]]
+            self.graf = [["q0", "~", "q1"]]
             self.stare_finala = "q1"
             self.iterator = 1
-        elif litera == "§":
-            self.graf = [["q0", "§", "q0"]]
+        elif litera == "~":
+            self.graf = [["q0", "~", "q0"]]
             self.stare_finala = "q0"
             self.iterator = 0
         else:
@@ -32,7 +32,7 @@ def concatenare(stiva, r1, r2):
     stare_finala2 = r2.stare_finala
     iterator2 = r2.iterator
 
-    graf1.append([stare_finala1, "§", graf2[0][0]])
+    graf1.append([stare_finala1, "~", graf2[0][0]])
     graf = graf1 + graf2[1:]
     stare_finala = stare_finala2
     stiva.append(Regex(iterator=iterator2, litera=None))
@@ -50,10 +50,10 @@ def reuniune(stiva, r1, r2):
 
     nod1 = "q" + str(iterator1)
     nod2 = "q" + str(iterator2 + iterator1)
-    graf1.append(["q0", "§", nod1])
-    graf2.append(["q0", "§", nod1])
-    graf1.append([stare_finala1, "§", nod2])
-    graf2.append([stare_finala2, "§", nod2])
+    graf1.append(["q0", "~", nod1])
+    graf2.append(["q0", "~", nod1])
+    graf1.append([stare_finala1, "~", nod2])
+    graf2.append([stare_finala2, "~", nod2])
     graf = graf1 + graf2[1:]
     stare_finala = nod2
     stiva.append(Regex(iterator=iterator2 + iterator1, litera=None))
@@ -66,11 +66,11 @@ def stelare(stiva, r):
     stare_finala = r.stare_finala
     iterator = r.iterator
 
-    graf.append([stare_finala, "§", "q1"])
+    graf.append([stare_finala, "~", "q1"])
     iterator += 1
     nod = "q" + str(iterator)
     graf.append(["q0", "§", nod])
-    graf.append([stare_finala, "§", nod])
+    graf.append([stare_finala, "~", nod])
     stare_finala = nod
     stiva.append(Regex(iterator=iterator, litera=None))
     stiva[-1].graf = graf
